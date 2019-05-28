@@ -10,6 +10,10 @@ import java.util.List;
 @RepositoryRestResource(collectionResourceRel = "instructor", path = "instructor")
 public interface InstructorRepository extends PagingAndSortingRepository<Instructor, Long> {
 
-    List<Instructor> findByLastName(@Param("name") String name);
+    List<Instructor> findInstructorsByLastNameIgnoreCase(@Param("name") String name);
+
+    List<Instructor> findInstructorsByFirstNameIgnoreCase(@Param("name") String name);
+
+    List<Instructor> findInstructorByFirstNameAndLastNameIgnoreCase(@Param("firstName") String firstName, @Param("lastName") String lastName);
 
 }
