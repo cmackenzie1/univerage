@@ -30,10 +30,10 @@ public class InstructorRepositoryTest {
     @Test
     public void whenFindByFirstName_thenReturnListOfMatchingInstructors() {
         // given
-        Instructor alfred = Instructor.builder().firstName(INSTRUCTOR1_FIRSTNAME).lastName(INSTRUCTOR1_LASTNAME).build();
-        Instructor alfred2 = Instructor.builder().firstName(INSTRUCTOR1_FIRSTNAME).lastName(INSTRUCTOR2_LASTNAME).build();
-        entityManager.persistAndFlush(alfred);
-        entityManager.persistAndFlush(alfred2);
+        Instructor bruce = Instructor.builder().firstName(INSTRUCTOR1_FIRSTNAME).lastName(INSTRUCTOR1_LASTNAME).build();
+        Instructor hulk = Instructor.builder().firstName(INSTRUCTOR1_FIRSTNAME).lastName(INSTRUCTOR2_LASTNAME).build();
+        entityManager.persistAndFlush(bruce);
+        entityManager.persistAndFlush(hulk);
 
         // when
         List<Instructor> results = instructorRepository.findInstructorsByFirstNameIgnoreCase(INSTRUCTOR1_FIRSTNAME);
@@ -41,17 +41,17 @@ public class InstructorRepositoryTest {
         // then
         assertEquals(results.size(), 2);
         for (Instructor instructor : results) {
-            assertThat(instructor.getFirstName()).isEqualTo(alfred.getFirstName());
+            assertThat(instructor.getFirstName()).isEqualTo(bruce.getFirstName());
         }
     }
 
     @Test
     public void whenFindByLastName_thenReturnListOfMatchingInstructors() {
         // given
-        Instructor alfred = Instructor.builder().firstName(INSTRUCTOR1_FIRSTNAME).lastName(INSTRUCTOR1_LASTNAME).build();
-        Instructor alfred2 = Instructor.builder().firstName(INSTRUCTOR1_FIRSTNAME).lastName(INSTRUCTOR2_LASTNAME).build();
-        entityManager.persistAndFlush(alfred);
-        entityManager.persistAndFlush(alfred2);
+        Instructor bruce = Instructor.builder().firstName(INSTRUCTOR1_FIRSTNAME).lastName(INSTRUCTOR1_LASTNAME).build();
+        Instructor hulk = Instructor.builder().firstName(INSTRUCTOR1_FIRSTNAME).lastName(INSTRUCTOR2_LASTNAME).build();
+        entityManager.persistAndFlush(bruce);
+        entityManager.persistAndFlush(hulk);
 
         // when
         List<Instructor> results = instructorRepository.findInstructorsByLastNameIgnoreCase(INSTRUCTOR2_LASTNAME);
@@ -59,17 +59,17 @@ public class InstructorRepositoryTest {
         // then
         assertEquals(results.size(), 1);
         for (Instructor instructor : results) {
-            assertThat(instructor.getLastName()).isEqualTo(alfred2.getLastName());
+            assertThat(instructor.getLastName()).isEqualTo(hulk.getLastName());
         }
     }
 
     @Test
     public void whenFindByFirstNameAndLastName_thenReturnListOfMatchingInstructors() {
         // given
-        Instructor alfred = Instructor.builder().firstName(INSTRUCTOR1_FIRSTNAME).lastName(INSTRUCTOR1_LASTNAME).build();
-        Instructor alfred2 = Instructor.builder().firstName(INSTRUCTOR1_FIRSTNAME).lastName(INSTRUCTOR2_LASTNAME).build();
-        entityManager.persistAndFlush(alfred);
-        entityManager.persistAndFlush(alfred2);
+        Instructor bruce = Instructor.builder().firstName(INSTRUCTOR1_FIRSTNAME).lastName(INSTRUCTOR1_LASTNAME).build();
+        Instructor hulk = Instructor.builder().firstName(INSTRUCTOR1_FIRSTNAME).lastName(INSTRUCTOR2_LASTNAME).build();
+        entityManager.persistAndFlush(bruce);
+        entityManager.persistAndFlush(hulk);
 
         // when
         List<Instructor> results = instructorRepository.findInstructorByFirstNameAndLastNameIgnoreCase(INSTRUCTOR1_FIRSTNAME, INSTRUCTOR2_LASTNAME);
@@ -77,17 +77,17 @@ public class InstructorRepositoryTest {
         // then
         assertEquals(results.size(), 1);
         for (Instructor instructor : results) {
-            assertThat(instructor).isEqualTo(alfred2);
+            assertThat(instructor).isEqualTo(hulk);
         }
     }
 
     @Test
     public void whenFindByFirstName_withCaseInsensitiveQuery_thenReturnListOfInstructors() {
         // given
-        Instructor alfred = Instructor.builder().firstName(INSTRUCTOR1_FIRSTNAME).lastName(INSTRUCTOR1_LASTNAME).build();
-        Instructor alfred2 = Instructor.builder().firstName(INSTRUCTOR1_FIRSTNAME).lastName(INSTRUCTOR2_LASTNAME).build();
-        entityManager.persistAndFlush(alfred);
-        entityManager.persistAndFlush(alfred2);
+        Instructor bruce = Instructor.builder().firstName(INSTRUCTOR1_FIRSTNAME).lastName(INSTRUCTOR1_LASTNAME).build();
+        Instructor hulk = Instructor.builder().firstName(INSTRUCTOR1_FIRSTNAME).lastName(INSTRUCTOR2_LASTNAME).build();
+        entityManager.persistAndFlush(bruce);
+        entityManager.persistAndFlush(hulk);
 
         // when
         List<Instructor> results = instructorRepository.findInstructorsByFirstNameIgnoreCase(QUERY_FIRSTNAME_CASE_INSENSITIVE);
@@ -102,10 +102,10 @@ public class InstructorRepositoryTest {
     @Test
     public void whenFindByFirstNameDoesNotExist_thenReturnEmptyListOfInstructors() {
         // given
-        Instructor alfred = Instructor.builder().firstName(INSTRUCTOR1_FIRSTNAME).lastName(INSTRUCTOR1_LASTNAME).build();
-        Instructor alfred2 = Instructor.builder().firstName(INSTRUCTOR1_FIRSTNAME).lastName(INSTRUCTOR2_LASTNAME).build();
-        entityManager.persistAndFlush(alfred);
-        entityManager.persistAndFlush(alfred2);
+        Instructor bruce = Instructor.builder().firstName(INSTRUCTOR1_FIRSTNAME).lastName(INSTRUCTOR1_LASTNAME).build();
+        Instructor hulk = Instructor.builder().firstName(INSTRUCTOR1_FIRSTNAME).lastName(INSTRUCTOR2_LASTNAME).build();
+        entityManager.persistAndFlush(bruce);
+        entityManager.persistAndFlush(hulk);
 
         // when
         List<Instructor> results = instructorRepository.findInstructorsByFirstNameIgnoreCase("James");
