@@ -41,11 +41,15 @@ public class CourseRepositoryTest {
 
     @Test(expected = PersistenceException.class)
     public void whenCourseCreatedAlreadyExists_thenExpectPersistenceException() {
+        // given
         Course chem101 = Course.builder().subject("CHEM").number(101).build();
         Course chem101_2 = Course.builder().subject("CHEM").number(101).build();
 
+        // when
         entityManager.persistAndFlush(chem101);
-        entityManager.persistAndFlush(chem101_2);
+
+        // then
+        entityManager.persistAndFlush(chem101_2); // Throws PersistenceException
     }
 
 }
