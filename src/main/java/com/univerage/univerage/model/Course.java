@@ -10,6 +10,10 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Builder
 @Entity
+@Table(
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = {"subject", "number"})
+        })
 public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
