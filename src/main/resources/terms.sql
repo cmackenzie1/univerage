@@ -1,5 +1,3 @@
-# Term Data
-use univerage;
 INSERT INTO term(id, semester, year)
 VALUES (1, 'Winter', 2000),
        (2, 'Spring', 2000),
