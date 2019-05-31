@@ -11,6 +11,9 @@ import java.util.Set;
 @NoArgsConstructor
 @Builder
 @Entity
+@Table(uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"course_id", "term_id", "section"})
+})
 public class CourseAverage {
 
     @Id
@@ -24,6 +27,7 @@ public class CourseAverage {
     @OneToMany
     private Set<Instructor> instructor;
 
+    private String section;
     private int size;
     private double average;
 }
