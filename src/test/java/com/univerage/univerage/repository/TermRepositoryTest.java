@@ -1,31 +1,26 @@
 package com.univerage.univerage.repository;
 
-import com.univerage.univerage.model.Term;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import com.univerage.univerage.model.mongo.Term;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
+import org.springframework.data.mongodb.core.MongoTemplate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(SpringRunner.class)
-@DataJpaTest
-public class TermRepositoryTest {
-
-    @Autowired
-    private TestEntityManager entityManager;
+@DataMongoTest
+class TermRepositoryTest {
 
     @Autowired
     private TermRepository termRepository;
 
     @Test
-    public void whenFindTermBySemesterAndYear_thenReturnTerm() {
+    void whenFindTermBySemesterAndYear_thenReturnTerm(@Autowired MongoTemplate mongoTemplate) {
         // given
         Term fall2016 = Term.builder().semester("Fall").year(2016).build();
 
-        entityManager.persistAndFlush(fall2016);
+        mongoTemplate.save(fall2016);
 
         // when
         Term found = termRepository.findTermBySemesterIgnoreCaseAndYear("fall", 2016);

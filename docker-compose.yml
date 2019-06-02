@@ -1,19 +1,15 @@
 version: '3.1'
 
 services:
-  db:
-    image: mysql
+  mongo:
+    image: mongo
     restart: always
     environment:
-      MYSQL_USER: springuser
-      MYSQL_PASSWORD: ThePassword
-      MYSQL_DATABASE: univerage
-      MYSQL_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: univerage
     ports:
-      - 3306:3306
-
-  adminer:
-    image: adminer
+      - 27017:27017
+  mongo-express:
+    image: mongo-express
     restart: always
     ports:
-      - 8080:8080
+      - 8081:8081

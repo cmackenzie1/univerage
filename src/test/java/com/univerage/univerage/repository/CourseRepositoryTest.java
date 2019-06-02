@@ -1,32 +1,27 @@
 package com.univerage.univerage.repository;
 
-import com.univerage.univerage.model.Course;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import com.univerage.univerage.model.mongo.Course;
+import lombok.extern.apachecommons.CommonsLog;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.test.context.junit4.SpringRunner;
-
-import javax.persistence.PersistenceException;
+import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
+import org.springframework.dao.DuplicateKeyException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(SpringRunner.class)
-@DataJpaTest
-public class CourseRepositoryTest {
-
-    @Autowired
-    private TestEntityManager entityManager;
+@DataMongoTest
+@CommonsLog
+class CourseRepositoryTest {
 
     @Autowired
     private CourseRepository courseRepository;
 
     @Test
-    public void whenFindCourseBySubjectAndNumber_thenReturnCourse() {
+    void whenFindCourseBySubjectAndNumber_thenReturnCourse() {
         // given
-        Course chem101 = Course.builder().subject("CHEM").number(101).build();
-        entityManager.persistAndFlush(chem101);
+        Course course = Course.builder().subject("CHEM").number(101).build();
+        courseRepository.save(course);
 
         // when
         Course found = courseRepository.findCourseBySubjectAndNumber("CHEM", 101);
@@ -35,21 +30,21 @@ public class CourseRepositoryTest {
         // then
         assertThat(found).isNotNull();
         assertThat(notFound).isNull();
-        assertThat(found.getSubject()).isEqualTo(chem101.getSubject());
-        assertThat(found.getId()).isEqualTo(chem101.getId());
+        assertThat(found.getSubject()).isEqualTo(course.getSubject());
+        assertThat(found.getId()).isEqualTo(course.getId());
     }
 
-    @Test(expected = PersistenceException.class)
-    public void whenCourseCreatedAlreadyExists_thenExpectPersistenceException() {
+    @Test
+    void whenCourseCreatedAlreadyExists_thenExpectPersistenceException() {
         // given
-        Course chem101 = Course.builder().subject("CHEM").number(101).build();
-        Course chem101_2 = Course.builder().subject("CHEM").number(101).build();
+        Course course1 = Course.builder().subject("ACCT").number(101).build();
+        Course course2 = Course.builder().subject("ACCT").number(101).build();
 
         // when
-        entityManager.persistAndFlush(chem101);
+        courseRepository.insert(course1);
 
         // then
-        entityManager.persistAndFlush(chem101_2); // Throws PersistenceException
+        Assertions.assertThatExceptionOfType(DuplicateKeyException.class).isThrownBy(() -> courseRepository.insert(course2));
     }
 
 }
