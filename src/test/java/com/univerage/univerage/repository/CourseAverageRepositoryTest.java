@@ -1,113 +1,109 @@
 package com.univerage.univerage.repository;
 
 import com.google.common.collect.Sets;
-import com.univerage.univerage.model.Course;
-import com.univerage.univerage.model.CourseAverage;
-import com.univerage.univerage.model.Instructor;
-import com.univerage.univerage.model.Term;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import com.univerage.univerage.model.mongo.Course;
+import com.univerage.univerage.model.mongo.CourseAverage;
+import com.univerage.univerage.model.mongo.Instructor;
+import com.univerage.univerage.model.mongo.Term;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
+import org.springframework.data.mongodb.core.MongoTemplate;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(SpringRunner.class)
-@DataJpaTest
-public class CourseAverageRepositoryTest {
+@DataMongoTest
+class CourseAverageRepositoryTest {
 
     @Autowired
-    private TestEntityManager entityManager;
+    private MongoTemplate mongoTemplate;
 
     @Autowired
     private CourseAverageRepository courseAverageRepository;
 
     @Test
-    public void whenFindAllByCourse_Subject_returnListOfCourseAveragesForSubject() {
-        Course cmput101 = Course.builder()
-                .subject("CMPUT")
+    void whenFindAllByCourse_Subject_returnListOfCourseAveragesForSubject() {
+        Course course1 = Course.builder()
+                .subject("CART")
                 .number(101)
                 .description("Beep boop")
                 .build();
-        entityManager.persistAndFlush(cmput101);
+        mongoTemplate.save(course1);
         Instructor instructorTony = Instructor.builder()
                 .firstName("Tony")
                 .lastName("Stark")
                 .build();
-        entityManager.persistAndFlush(instructorTony);
+        mongoTemplate.save(instructorTony);
         Term fall2019 = Term.builder()
                 .semester("Fall")
                 .year(2019)
                 .build();
-        entityManager.persistAndFlush(fall2019);
-        CourseAverage cmput101CourseAverage = CourseAverage.builder()
-                .course(cmput101)
+        mongoTemplate.save(fall2019);
+        CourseAverage courseAverage1 = CourseAverage.builder()
+                .course(course1)
                 .term(fall2019)
                 .instructor(Sets.newHashSet(instructorTony))
                 .average(1.1)
                 .section("A1")
                 .size(10)
                 .build();
-        entityManager.persistAndFlush(cmput101CourseAverage);
-        List<CourseAverage> found = courseAverageRepository.findAllByCourseSubject("CMPUT");
+        mongoTemplate.save(courseAverage1);
+        List<CourseAverage> found = courseAverageRepository.findAllByCourseSubject("CART");
         for (CourseAverage courseAverage : found) {
             assertThat(courseAverage).isInstanceOf(CourseAverage.class);
-            assertThat(courseAverage.getCourse().getSubject()).isEqualTo("CMPUT");
+            assertThat(courseAverage.getCourse().getSubject()).isEqualTo("CART");
         }
     }
 
     @Test
-    public void whenFindAllByCourse_SubjectAndTerm_SemesterAndTerm_Year_thenReturnMatchingListOfCourseAverages() {
+    void whenFindAllByCourse_SubjectAndTerm_SemesterAndTerm_Year_thenReturnMatchingListOfCourseAverages() {
         // given
-        Course cmput101 = Course.builder()
-                .subject("CMPUT")
-                .number(101)
+        Course course1 = Course.builder()
+                .subject("CART")
+                .number(102)
                 .build();
-        entityManager.persistAndFlush(cmput101);
-        Course cmput201 = Course.builder()
-                .subject("CMPUT")
-                .number(201)
+        mongoTemplate.save(course1);
+        Course course2 = Course.builder()
+                .subject("CART")
+                .number(103)
                 .build();
-        entityManager.persistAndFlush(cmput201);
-        Course chem101 = Course.builder()
-                .subject("CHEM")
-                .number(101)
+        mongoTemplate.save(course2);
+        Course course3 = Course.builder()
+                .subject("CART")
+                .number(104)
                 .build();
-        entityManager.persistAndFlush(chem101);
-        Term fall2019 = Term.builder()
-                .semester("Fall")
+        mongoTemplate.save(course3);
+        Term term1 = Term.builder()
+                .semester("CART_FALL")
                 .year(2019)
                 .build();
-        entityManager.persistAndFlush(fall2019);
-        CourseAverage cmput101CourseAverage = CourseAverage.builder()
-                .course(cmput101)
-                .term(fall2019)
+        mongoTemplate.save(term1);
+        CourseAverage courseAverage1 = CourseAverage.builder()
+                .course(course1)
+                .term(term1)
                 .build();
-        entityManager.persistAndFlush(cmput101CourseAverage);
-        CourseAverage cmput201CourseAverage = CourseAverage.builder()
-                .course(cmput201)
-                .term(fall2019)
+        mongoTemplate.save(courseAverage1);
+        CourseAverage courseAverage2 = CourseAverage.builder()
+                .course(course2)
+                .term(term1)
                 .build();
-        entityManager.persistAndFlush(cmput201CourseAverage);
-        CourseAverage chem101CourseAverage = CourseAverage.builder()
-                .course(chem101)
-                .term(fall2019)
+        mongoTemplate.save(courseAverage2);
+        CourseAverage courseAverage3 = CourseAverage.builder()
+                .course(course3)
+                .term(term1)
                 .build();
-        entityManager.persistAndFlush(chem101CourseAverage);
+        mongoTemplate.save(courseAverage3);
         // when
         List<CourseAverage> courseAverages = courseAverageRepository.findAllByCourse_SubjectAndTerm_SemesterAndTerm_Year(
-                "CMPUT",
-                "Fall",
+                "CART",
+                "CART_FALL",
                 2019);
         // then
-        assertThat(courseAverages).hasSize(2);
         for (CourseAverage courseAverage : courseAverages) {
             assertThat(courseAverage).isInstanceOf(CourseAverage.class);
-            assertThat(courseAverage.getCourse().getSubject()).isEqualTo("CMPUT");
+            assertThat(courseAverage.getCourse().getSubject()).isEqualTo("CART");
         }
     }
 
