@@ -1,1 +1,0 @@
-TERMS = ["Winter", "Spring", "Summer", "Fall"]with open("terms.txt", "w") as f:    id = 1    for year in range(2000, 2020):        for term in TERMS:            f.write("({id},'{term}',{year}),\n".format(id=id, term=term, year=year))            id += 1
