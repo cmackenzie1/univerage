@@ -14,28 +14,36 @@
  *    limitations under the License.
  */
 
-package com.univerage.univerage.model.mongo;
+package com.univerage.univerage.uofa.model;
 
 import lombok.*;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.CompoundIndex;
+import org.springframework.data.mongodb.core.index.CompoundIndexes;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
-import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@EqualsAndHashCode
 @Document
-public class Instructor {
+@CompoundIndexes(value = {
+        @CompoundIndex(unique = true, def = "{'term': 1}")
+})
+public class Term {
     @Id
-    @NotNull
     private String id;
 
-    @NotNull
-    private String firstName;
-    @NotNull
-    private String lastName;
+    @Field("term")
+    private String term;
+    @Field("startdate")
+    private LocalDate startDate;
+    @Field("enddate")
+    private LocalDate endDate;
+    @Field("termtitle")
+    private String title;
 }

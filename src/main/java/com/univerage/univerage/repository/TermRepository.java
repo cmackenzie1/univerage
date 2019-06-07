@@ -16,12 +16,22 @@
 
 package com.univerage.univerage.repository;
 
-import com.univerage.univerage.model.mongo.Term;
+import com.univerage.univerage.uofa.model.Term;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDate;
+import java.util.List;
 
 @RepositoryRestResource(collectionResourceRel = "term", path = "term")
-public interface TermRepository extends PagingAndSortingRepository<Term, Long> {
-    Term findTermBySemesterIgnoreCaseAndYear(@Param("semester") String semester, @Param("year") int year);
+public interface TermRepository extends PagingAndSortingRepository<Term, String> {
+    Term findTermById(@Param("id") String id);
+
+    Term findTermByTerm(@Param("term") String term);
+
+    List<Term> findTermsByTitleIgnoreCaseContaining(@Param("title") String title);
+
+    List<Term> findTermsByStartDateAfter(@Param("startdate") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startdate);
 }
