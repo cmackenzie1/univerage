@@ -18,8 +18,18 @@ package com.univerage.univerage.repository;
 
 import com.univerage.univerage.uofa.model.Course;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+
+import java.util.List;
 
 @RepositoryRestResource(collectionResourceRel = "course", path = "course")
 public interface CourseRepository extends MongoRepository<Course, String> {
+    Course findCourseByCourse(@Param("course") String course);
+
+    List<Course> findCoursesByTerm(@Param("term") String term);
+
+    List<Course> findCoursesByIgnoreCaseSubject(@Param("subject") String subject);
+
+    List<Course> findCoursesByIgnoreCaseSubjectAndCatalog(@Param("subject") String subject, @Param("catalog") String catalog);
 }
