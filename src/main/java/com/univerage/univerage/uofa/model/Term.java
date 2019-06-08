@@ -16,6 +16,7 @@
 
 package com.univerage.univerage.uofa.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.CompoundIndex;
@@ -45,5 +46,8 @@ public class Term {
     @Field("enddate")
     private LocalDate endDate;
     @Field("termtitle")
+    @JsonProperty("termtitle")
     private String title;
+
+
 }
