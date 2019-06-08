@@ -9,7 +9,9 @@ services:
     links:
       - mongo
     environment:
-      - SPRING_PROFILES_ACTIVE=default,prd
+      - SPRING_PROFILES_ACTIVE=prd
+    depends_on:
+      - mongo
   mongo:
     image: mongo
     restart: always

@@ -14,19 +14,14 @@
  *    limitations under the License.
  */
 
-package com.univerage.univerage.model.mongo;
+package com.univerage.univerage.uofa.model;
 
 import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.annotation.Version;
 import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.index.CompoundIndexes;
-import org.springframework.data.mongodb.core.index.TextIndexed;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import javax.validation.constraints.NotNull;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 
 @Getter
@@ -36,24 +31,38 @@ import javax.validation.constraints.NotNull;
 @Builder
 @Document
 @CompoundIndexes(value = {
-        @CompoundIndex(unique = true, def = "{'subject': 1, 'number': 1}")
+        @CompoundIndex(unique = true, def = "{'term': 1, 'course': 1}")
 })
 public class Course {
     @Id
     private String id;
 
-    @NotNull
+    @Field("term")
+    private String term;
+    @Field("course")
+    private String course;
+    @Field("subject")
     private String subject;
-    @NotNull
-    private int number;
-    @TextIndexed
-    private String description;
-
-    // Metadata
-    @LastModifiedDate
-    private Long lastModification;
-    @CreatedDate
-    private Long creationDate;
-    @Version
-    private long version;
+    @Field("subjecttitle")
+    private String subjectTitle;
+    @Field("catalog")
+    private String catalog;
+    @Field("coursetitle")
+    private String courseTitle;
+    @Field("coursedescription")
+    private String courseDescription;
+    @Field("facultycode")
+    private String facultyCode;
+    @Field("faculty")
+    private String faculty;
+    @Field("departmentcode")
+    private String departmentCode;
+    @Field("department")
+    private String department;
+    @Field("career")
+    private String career;
+    @Field("units")
+    private String units;
+    @Field("asstring")
+    private String asString;
 }

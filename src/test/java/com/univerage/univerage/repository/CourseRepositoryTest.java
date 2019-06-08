@@ -16,51 +16,108 @@
 
 package com.univerage.univerage.repository;
 
-import com.univerage.univerage.model.mongo.Course;
-import lombok.extern.apachecommons.CommonsLog;
-import org.assertj.core.api.Assertions;
+import com.univerage.univerage.uofa.model.Course;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
-import org.springframework.dao.DuplicateKeyException;
+
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataMongoTest
-@CommonsLog
 class CourseRepositoryTest {
 
     @Autowired
     private CourseRepository courseRepository;
 
     @Test
-    void whenFindCourseBySubjectAndNumber_thenReturnCourse() {
-        // given
-        Course course = Course.builder().subject("CHEM").number(101).build();
+    void whenFindCourseByCourse_returnCourse() {
+        Course course = Course.builder()
+                .course("107763")
+                .build();
+
+        courseRepository.deleteAll();
         courseRepository.save(course);
 
-        // when
-        Course found = courseRepository.findCourseBySubjectAndNumber("CHEM", 101);
-        Course notFound = courseRepository.findCourseBySubjectAndNumber("BLAH", 101);
-
-        // then
-        assertThat(found).isNotNull();
-        assertThat(notFound).isNull();
-        assertThat(found.getSubject()).isEqualTo(course.getSubject());
-        assertThat(found.getId()).isEqualTo(course.getId());
+        Course result = courseRepository.findCourseByCourse(course.getCourse());
+        assertThat(result).isEqualToIgnoringGivenFields(course, "id");
     }
 
     @Test
-    void whenCourseCreatedAlreadyExists_thenExpectPersistenceException() {
-        // given
-        Course course1 = Course.builder().subject("ACCT").number(101).build();
-        Course course2 = Course.builder().subject("ACCT").number(101).build();
+    void whenFindCoursesByTerm_returnCourses() {
+        Course course = Course.builder()
+                .course("1")
+                .term("1700")
+                .build();
 
-        // when
-        courseRepository.insert(course1);
+        Course course2 = Course.builder()
+                .course("2")
+                .term("1700")
+                .build();
 
-        // then
-        Assertions.assertThatExceptionOfType(DuplicateKeyException.class).isThrownBy(() -> courseRepository.insert(course2));
+        courseRepository.deleteAll();
+        courseRepository.save(course);
+        courseRepository.save(course2);
+
+        List<Course> result = courseRepository.findCoursesByTerm(course.getTerm());
+        assertThat(result).hasSize(2);
+        for (Course c :
+                result) {
+            assertThat(c.getTerm()).isEqualTo(course.getTerm());
+        }
     }
 
+    @Test
+    void whenFindCoursesByIgnoreCaseSubject_returnCourses() {
+        Course course = Course.builder()
+                .course("1")
+                .term("1200")
+                .subject("CHEM")
+                .build();
+
+        Course course2 = Course.builder()
+                .course("2")
+                .term("1200")
+                .subject("CMPUT")
+                .build();
+
+        courseRepository.deleteAll();
+        courseRepository.save(course);
+        courseRepository.save(course2);
+
+        List<Course> result = courseRepository.findCoursesByIgnoreCaseSubject(course.getSubject());
+        assertThat(result).hasSize(1);
+    }
+
+    @Test
+    void whenFindCoursesByIgnoreCaseSubjectAndCatalog_returnCourses() {
+        Course course = Course.builder()
+                .course("1")
+                .term("1200")
+                .subject("CHEM")
+                .build();
+
+        Course course2 = Course.builder()
+                .course("2")
+                .term("1200")
+                .subject("CMPUT")
+                .catalog("101")
+                .build();
+
+        Course course3 = Course.builder()
+                .course("3")
+                .term("1200")
+                .subject("CMPUT")
+                .catalog("102")
+                .build();
+
+        courseRepository.deleteAll();
+        courseRepository.save(course);
+        courseRepository.save(course2);
+        courseRepository.save(course3);
+
+        List<Course> result = courseRepository.findCoursesByIgnoreCaseSubjectAndCatalog(course2.getSubject(), course2.getCatalog());
+        assertThat(result).hasSize(1);
+    }
 }
