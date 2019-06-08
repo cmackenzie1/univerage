@@ -1,6 +1,15 @@
 version: '3.1'
 
+# https://spring.io/guides/gs/spring-boot-docker/
 services:
+  univerage:
+    image: cmackenzie1/univerage:0.0.1-SNAPSHOT
+    ports:
+      - 3000:3000
+    links:
+      - mongo
+    environment:
+      - SPRING_PROFILES_ACTIVE=default,prd
   mongo:
     image: mongo
     restart: always
