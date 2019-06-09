@@ -39,30 +39,43 @@ public class Course {
 
     @Field("term")
     private String term;
+
     @Field("course")
     private String course;
+
     @Field("subject")
     private String subject;
+
     @Field("subjecttitle")
     private String subjectTitle;
+
     @Field("catalog")
     private String catalog;
+
     @Field("coursetitle")
     private String courseTitle;
+
     @Field("coursedescription")
     private String courseDescription;
+
     @Field("facultycode")
     private String facultyCode;
+
     @Field("faculty")
     private String faculty;
+
     @Field("departmentcode")
     private String departmentCode;
+
     @Field("department")
     private String department;
+
     @Field("career")
     private String career;
+
     @Field("units")
     private String units;
+
     @Field("asstring")
     private String asString;
 }

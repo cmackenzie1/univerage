@@ -41,13 +41,17 @@ public class Term {
 
     @Field("term")
     private String term;
+
     @Field("startdate")
+    @JsonProperty("startdate")
     private LocalDate startDate;
+
     @Field("enddate")
+    @JsonProperty("enddate")
     private LocalDate endDate;
+
     @Field("termtitle")
     @JsonProperty("termtitle")
     private String title;
-
 
 }

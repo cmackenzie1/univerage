@@ -38,60 +38,88 @@ public class Class {
 
     @Field("term")
     private String term;
+
     @Field("course")
     private String course;
+
     @Field("class")
     private String _class;
+
     @Field("section")
     private String section;
+
     @Field("component")
     private String component;
+
     @Field("classtype")
     private String classType;
+
     @Field("classstatus")
     private String classStatus;
+
     @Field("enrollstatus")
     private String enrollStatus;
+
     @Field("capacity")
     private String capacity;
+
     @Field("startdate")
     private String startDate;
+
     @Field("enddate")
     private String endDate;
+
     @Field("session")
     private String session;
+
     @Field("campus")
     private String campus;
+
     @Field("location")
     private String location;
+
     @Field("autoenroll")
     private String autoEnroll;
+
     @Field("classtopic")
     private String classTopic;
+
     @Field("classnotes")
     private String classNotes;
+
     @Field("consent")
     private String consent;
+
     @Field("gradingbasis")
     private String gradingBasis;
+
     @Field("instructionMode")
     private String instructionMode;
+
     @Field("units")
     private String units;
+
     @Field("classurl")
     private String classUrl;
+
     @Field("instructoruid")
     private String instructorUid;
+
     @Field("examstatus")
     private String examStatus;
+
     @Field("examdate")
     private String examDate;
+
     @Field("examstarttime")
     private String examStartTime;
+
     @Field("examendtime")
     private String examEndTime;
+
     @Field("examLocation")
     private String examLocation;
+
     @Field("asstring")
     private String asString;
 }
