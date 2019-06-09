@@ -16,12 +16,15 @@
 
 package com.univerage.univerage.uofa.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.index.CompoundIndexes;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -43,6 +46,7 @@ public class Class {
     private String course;
 
     @Field("class")
+    @JsonProperty("class")
     private String _class;
 
     @Field("section")
@@ -52,22 +56,27 @@ public class Class {
     private String component;
 
     @Field("classtype")
+    @JsonProperty("classtype")
     private String classType;
 
     @Field("classstatus")
+    @JsonProperty("classstatus")
     private String classStatus;
 
     @Field("enrollstatus")
+    @JsonProperty("enrollstatus")
     private String enrollStatus;
 
     @Field("capacity")
     private String capacity;
 
     @Field("startdate")
-    private String startDate;
+    @JsonProperty("startdate")
+    private LocalDate startDate;
 
     @Field("enddate")
-    private String endDate;
+    @JsonProperty("enddate")
+    private LocalDate endDate;
 
     @Field("session")
     private String session;
@@ -79,47 +88,60 @@ public class Class {
     private String location;
 
     @Field("autoenroll")
+    @JsonProperty("autoenroll")
     private String autoEnroll;
 
     @Field("classtopic")
+    @JsonProperty("classtopic")
     private String classTopic;
 
     @Field("classnotes")
+    @JsonProperty("classnotes")
     private String classNotes;
 
     @Field("consent")
     private String consent;
 
     @Field("gradingbasis")
+    @JsonProperty("gradingbasis")
     private String gradingBasis;
 
-    @Field("instructionMode")
+    @Field("instructionmode")
+    @JsonProperty("instructionmode")
     private String instructionMode;
 
     @Field("units")
     private String units;
 
     @Field("classurl")
+    @JsonProperty("classurl")
     private String classUrl;
 
     @Field("instructoruid")
+    @JsonProperty("instructoruid")
     private String instructorUid;
 
     @Field("examstatus")
+    @JsonProperty("examstatus")
     private String examStatus;
 
     @Field("examdate")
-    private String examDate;
+    @JsonProperty("examdate")
+    private LocalDate examDate;
 
     @Field("examstarttime")
+    @JsonProperty("examstarttime")
     private String examStartTime;
 
     @Field("examendtime")
+    @JsonProperty("examendtime")
     private String examEndTime;
 
     @Field("examLocation")
+    @JsonProperty("examLocation")
     private String examLocation;
 
     @Field("asstring")
+    @JsonProperty("asstring")
     private String asString;
 }

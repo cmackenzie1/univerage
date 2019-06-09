@@ -16,6 +16,7 @@
 
 package com.univerage.univerage.uofa.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.CompoundIndex;
@@ -47,24 +48,29 @@ public class Course {
     private String subject;
 
     @Field("subjecttitle")
+    @JsonProperty("subjecttitle")
     private String subjectTitle;
 
     @Field("catalog")
     private String catalog;
 
     @Field("coursetitle")
+    @JsonProperty("coursetitle")
     private String courseTitle;
 
     @Field("coursedescription")
+    @JsonProperty("coursedescription")
     private String courseDescription;
 
     @Field("facultycode")
+    @JsonProperty("facultycode")
     private String facultyCode;
 
     @Field("faculty")
     private String faculty;
 
     @Field("departmentcode")
+    @JsonProperty("departmentcode")
     private String departmentCode;
 
     @Field("department")
@@ -77,5 +83,6 @@ public class Course {
     private String units;
 
     @Field("asstring")
+    @JsonProperty("asstring")
     private String asString;
 }

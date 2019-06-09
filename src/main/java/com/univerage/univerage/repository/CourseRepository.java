@@ -17,14 +17,14 @@
 package com.univerage.univerage.repository;
 
 import com.univerage.univerage.uofa.model.Course;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import java.util.List;
 
 @RepositoryRestResource(collectionResourceRel = "course", path = "course")
-public interface CourseRepository extends MongoRepository<Course, String> {
+public interface CourseRepository extends PagingAndSortingRepository<Course, String> {
     Course findCourseByCourse(@Param("course") String course);
 
     List<Course> findCoursesByTerm(@Param("term") String term);
