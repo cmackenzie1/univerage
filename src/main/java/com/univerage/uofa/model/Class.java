@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package com.univerage.univerage.uofa.model;
+package com.univerage.uofa.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;

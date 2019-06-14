@@ -14,24 +14,18 @@
  *    limitations under the License.
  */
 
-package com.univerage.univerage.repository;
+package com.univerage.repository;
 
-import com.univerage.univerage.uofa.model.Term;
+import com.univerage.uofa.model.Class;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDate;
 import java.util.List;
 
-@RepositoryRestResource(collectionResourceRel = "term", path = "term")
-public interface TermRepository extends PagingAndSortingRepository<Term, String> {
-    Term findTermById(@Param("id") String id);
+@RepositoryRestResource(collectionResourceRel = "class", path = "class")
+public interface ClassRepository extends PagingAndSortingRepository<Class, String> {
+    Class findClassByClass(@Param("course") String course);
 
-    Term findTermByTerm(@Param("term") String term);
-
-    List<Term> findTermsByTitleIgnoreCaseContaining(@Param("title") String title);
-
-    List<Term> findTermsByStartDateAfter(@Param("startdate") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startdate);
+    List<Class> findClassByTerm(@Param("term") String term);
 }

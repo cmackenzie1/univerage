@@ -14,18 +14,16 @@
  *    limitations under the License.
  */
 
-package com.univerage.univerage;
+package com.univerage;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.data.mongodb.config.EnableMongoAuditing;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootApplication
-@EnableMongoAuditing
-public class UniverageApplication {
+@SpringBootTest
+class UniverageApplicationTests {
 
-    public static void main(String[] args) {
-        SpringApplication.run(UniverageApplication.class, args);
+    @Test
+    void contextLoads() {
     }
 
 }

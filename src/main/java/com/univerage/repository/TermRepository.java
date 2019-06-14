@@ -14,22 +14,24 @@
  *    limitations under the License.
  */
 
-package com.univerage.univerage.repository;
+package com.univerage.repository;
 
-import com.univerage.univerage.uofa.model.Course;
+import com.univerage.uofa.model.Term;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
 import java.util.List;
 
-@RepositoryRestResource(collectionResourceRel = "course", path = "course")
-public interface CourseRepository extends PagingAndSortingRepository<Course, String> {
-    Course findCourseByCourse(@Param("course") String course);
+@RepositoryRestResource(collectionResourceRel = "term", path = "term")
+public interface TermRepository extends PagingAndSortingRepository<Term, String> {
+    Term findTermById(@Param("id") String id);
 
-    List<Course> findCoursesByTerm(@Param("term") String term);
+    Term findTermByTerm(@Param("term") String term);
 
-    List<Course> findCoursesByIgnoreCaseSubject(@Param("subject") String subject);
+    List<Term> findTermsByTitleIgnoreCaseContaining(@Param("title") String title);
 
-    List<Course> findCoursesByIgnoreCaseSubjectAndCatalog(@Param("subject") String subject, @Param("catalog") String catalog);
+    List<Term> findTermsByStartDateAfter(@Param("startdate") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startdate);
 }

@@ -14,18 +14,22 @@
  *    limitations under the License.
  */
 
-package com.univerage.univerage.repository;
+package com.univerage.repository;
 
-import com.univerage.univerage.uofa.model.Class;
+import com.univerage.uofa.model.Course;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import java.util.List;
 
-@RepositoryRestResource(collectionResourceRel = "class", path = "class")
-public interface ClassRepository extends PagingAndSortingRepository<Class, String> {
-    Class findClassByClass(@Param("course") String course);
+@RepositoryRestResource(collectionResourceRel = "course", path = "course")
+public interface CourseRepository extends PagingAndSortingRepository<Course, String> {
+    Course findCourseByCourse(@Param("course") String course);
 
-    List<Class> findClassByTerm(@Param("term") String term);
+    List<Course> findCoursesByTerm(@Param("term") String term);
+
+    List<Course> findCoursesByIgnoreCaseSubject(@Param("subject") String subject);
+
+    List<Course> findCoursesByIgnoreCaseSubjectAndCatalog(@Param("subject") String subject, @Param("catalog") String catalog);
 }
