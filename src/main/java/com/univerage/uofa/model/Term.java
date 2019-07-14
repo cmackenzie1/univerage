@@ -40,7 +40,7 @@ public class Term {
     private String id;
 
     @Field("term")
-    private String term;
+    private Integer term;
 
     @Field("startdate")
     @JsonProperty("startdate")

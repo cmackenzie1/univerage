@@ -39,10 +39,10 @@ public class Course {
     private String id;
 
     @Field("term")
-    private String term;
+    private Integer term;
 
     @Field("course")
-    private String course;
+    private Integer course;
 
     @Field("subject")
     private String subject;
@@ -80,7 +80,7 @@ public class Course {
     private String career;
 
     @Field("units")
-    private String units;
+    private Double units;
 
     @Field("asstring")
     @JsonProperty("asstring")

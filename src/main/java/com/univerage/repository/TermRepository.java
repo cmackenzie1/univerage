@@ -29,7 +29,7 @@ import java.util.List;
 public interface TermRepository extends PagingAndSortingRepository<Term, String> {
     Term findTermById(@Param("id") String id);
 
-    Term findTermByTerm(@Param("term") String term);
+    Term findTermByTerm(@Param("term") Integer term);
 
     List<Term> findTermsByTitleIgnoreCaseContaining(@Param("title") String title);
 

@@ -25,9 +25,9 @@ import java.util.List;
 
 @RepositoryRestResource(collectionResourceRel = "course", path = "course")
 public interface CourseRepository extends PagingAndSortingRepository<Course, String> {
-    Course findCourseByCourse(@Param("course") String course);
+    Course findCourseByCourse(@Param("course") Integer course);
 
-    List<Course> findCoursesByTerm(@Param("term") String term);
+    List<Course> findCoursesByTerm(@Param("term") Integer term);
 
     List<Course> findCoursesByIgnoreCaseSubject(@Param("subject") String subject);
 

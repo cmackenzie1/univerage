@@ -40,14 +40,14 @@ public class Class {
     private String id;
 
     @Field("term")
-    private String term;
+    private Integer term;
 
     @Field("course")
-    private String course;
+    private Integer course;
 
     @Field("class")
     @JsonProperty("class")
-    private String _class;
+    private Integer _class;
 
     @Field("section")
     private String section;
@@ -68,7 +68,7 @@ public class Class {
     private String enrollStatus;
 
     @Field("capacity")
-    private String capacity;
+    private Integer capacity;
 
     @Field("startdate")
     @JsonProperty("startdate")
@@ -111,7 +111,7 @@ public class Class {
     private String instructionMode;
 
     @Field("units")
-    private String units;
+    private Double units;
 
     @Field("classurl")
     @JsonProperty("classurl")
