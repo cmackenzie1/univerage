@@ -34,7 +34,7 @@ class CourseRepositoryTest {
     @Test
     void whenFindCourseByCourse_returnCourse() {
         Course course = Course.builder()
-                .course("107763")
+                .course(107763)
                 .build();
 
         courseRepository.deleteAll();
@@ -47,13 +47,13 @@ class CourseRepositoryTest {
     @Test
     void whenFindCoursesByTerm_returnCourses() {
         Course course = Course.builder()
-                .course("1")
-                .term("1700")
+                .course(1)
+                .term(1700)
                 .build();
 
         Course course2 = Course.builder()
-                .course("2")
-                .term("1700")
+                .course(2)
+                .term(1700)
                 .build();
 
         courseRepository.deleteAll();
@@ -71,14 +71,14 @@ class CourseRepositoryTest {
     @Test
     void whenFindCoursesByIgnoreCaseSubject_returnCourses() {
         Course course = Course.builder()
-                .course("1")
-                .term("1200")
+                .course(1)
+                .term(1200)
                 .subject("CHEM")
                 .build();
 
         Course course2 = Course.builder()
-                .course("2")
-                .term("1200")
+                .course(2)
+                .term(1200)
                 .subject("CMPUT")
                 .build();
 
@@ -93,21 +93,21 @@ class CourseRepositoryTest {
     @Test
     void whenFindCoursesByIgnoreCaseSubjectAndCatalog_returnCourses() {
         Course course = Course.builder()
-                .course("1")
-                .term("1200")
+                .course(1)
+                .term(1200)
                 .subject("CHEM")
                 .build();
 
         Course course2 = Course.builder()
-                .course("2")
-                .term("1200")
+                .course(2)
+                .term(1200)
                 .subject("CMPUT")
                 .catalog("101")
                 .build();
 
         Course course3 = Course.builder()
-                .course("3")
-                .term("1200")
+                .course(3)
+                .term(1200)
                 .subject("CMPUT")
                 .catalog("102")
                 .build();

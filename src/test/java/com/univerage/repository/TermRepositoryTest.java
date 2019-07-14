@@ -35,7 +35,7 @@ class TermRepositoryTest {
     @Test
     void whenFindTermById_returnTerm() {
         Term term = Term.builder()
-                .term("1700")
+                .term(1700)
                 .startDate(LocalDate.of(2020, 1, 6))
                 .endDate(LocalDate.of(2020, 4, 8))
                 .title("Winter Term 2020")
@@ -51,7 +51,7 @@ class TermRepositoryTest {
     @Test
     void whenFindTermByTerm_returnTerm() {
         Term term = Term.builder()
-                .term("1700")
+                .term(1700)
                 .startDate(LocalDate.of(2020, 1, 6))
                 .endDate(LocalDate.of(2020, 4, 8))
                 .title("Winter Term 2020")
@@ -67,14 +67,14 @@ class TermRepositoryTest {
     @Test
     void whenFindTermsByTitleIgnoreCaseContaining_returnTerms() {
         Term term = Term.builder()
-                .term("1700")
+                .term(1700)
                 .startDate(LocalDate.of(2020, 1, 6))
                 .endDate(LocalDate.of(2020, 4, 8))
                 .title("Winter Term 2020")
                 .build();
 
         Term term2 = Term.builder()
-                .term("1800")
+                .term(1800)
                 .startDate(LocalDate.of(2021, 1, 6))
                 .endDate(LocalDate.of(2021, 4, 8))
                 .title("Winter Term 2021")
@@ -91,14 +91,14 @@ class TermRepositoryTest {
     @Test
     void whenFindTermsByStartDateAfter_returnTerms() {
         Term term = Term.builder()
-                .term("1700")
+                .term(1700)
                 .startDate(LocalDate.of(2020, 1, 6))
                 .endDate(LocalDate.of(2020, 4, 8))
                 .title("Winter Term 2020")
                 .build();
 
         Term term2 = Term.builder()
-                .term("1800")
+                .term(1800)
                 .startDate(LocalDate.of(2021, 1, 6))
                 .endDate(LocalDate.of(2021, 4, 8))
                 .title("Winter Term 2021")
