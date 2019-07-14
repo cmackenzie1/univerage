@@ -19,6 +19,9 @@ services:
       MONGO_INITDB_DATABASE: univerage
     ports:
       - 27017:27017
+    volumes:
+      - ./data:/tmp/data
+      - ./mongo-scripts:/docker-entrypoint-initdb.d
   mongo-express:
     image: mongo-express
     restart: always
