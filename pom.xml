@@ -40,7 +40,7 @@
         <javafaker.version>0.18</javafaker.version>
         <logstash-logback-encoder.version>6.0</logstash-logback-encoder.version>
         <asciidoctor-maven-plugin.version>1.5.3</asciidoctor-maven-plugin.version>
-        <spring-boot.version>2.1.5.RELEASE</spring-boot.version>
+        <spring-boot.version>2.2.11.RELEASE</spring-boot.version>
         <docker.image.prefix>cmackenzie1</docker.image.prefix>
         <shade.version>3.2.1</shade.version>
     </properties>
